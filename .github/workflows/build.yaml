@@ -7,6 +7,20 @@ on:
     branches: [ develop ]
 
 jobs:
+  name: Configure Maven settings for Anypoint Exchange
+  run: |
+    mkdir -p ~/.m2
+    cat <<EOF > ~/.m2/settings.xml
+    <settings>
+      <servers>
+        <server>
+          <id>anypoint-exchange-v3</id>
+          <username>${{ secrets.anypoint_platform_username }}</username>
+          <password>${{ secrets.anypoint_platform_password }}</password>
+        </server>
+      </servers>
+    </settings>
+    EOF
   build:
     runs-on: ubuntu-latest
     steps:
