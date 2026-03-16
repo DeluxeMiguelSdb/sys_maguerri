@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<http:listener-config name="s-test-maguerri-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="${http.port}" />
+    </http:listener-config>
+    <apikit:config name="s-test-maguerri-config" api="resource::6d17cf3d-5ba8-472c-ad34-50869ab044f4:s-test-maguerri:1.0.2:raml:zip:s-test-maguerri.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<global-property doc:name="Global Property" doc:id="22128a15-4e1c-4e9e-a561-872e0acaaf63" name="env" value="local" />
+	<configuration-properties doc:name="Configuration properties" doc:id="b7177c5f-de56-478a-b38f-ee0c3e450b35" file="properties\\${env}-config.yaml" />
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="52903d95-c94f-4fad-8b16-b90b69082cf7" flowRef="s-test-maguerri-main" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="aede8201-b59f-4628-a59c-bc1ce8126004" file="properties\\${env}-secure.yaml" key="${decrypt.key}" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="94def4e4-9b11-47b0-979f-8aad385e6a96" >
+		<salesforce:oauth-user-pass-connection username="${secure::sfdc.login.username}" password="${secure::sfdc.login.password}" securityToken="${secure::sfdc.securityToken}" tokenEndpoint="${secure::sfdc.tokenEndpoint}" consumerKey="${secure::sfdc.customer.key}" consumerSecret="${secure::sfdc.customer.secret}"/>
+	</salesforce:sfdc-config>
+	
+</mule>

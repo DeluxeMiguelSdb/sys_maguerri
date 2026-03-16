@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<flow name="getSFDCaccounts" doc:id="60c67802-1678-4be0-bf84-8f422b9cfacf">
+		<set-variable value="#[%dw 2.0&#10;output application/java&#10;&#10;var conditions = [&#10;    if (!isBlank(attributes.queryParams.accountId))&#10;        &quot;Id = '&quot; ++ attributes.queryParams.accountId ++ &quot;'&quot;&#10;    else&#10;        null,&#10;&#10;    if (!isBlank(attributes.queryParams.industryId))&#10;        &quot;Industry = '&quot; ++ attributes.queryParams.industryId ++ &quot;'&quot;&#10;    else&#10;        null&#10;] filter ($ != null)&#10;&#10;---&#10;&quot;SELECT Id, Name, AccountNumber, Industry, Description, BillingStreet FROM Account&quot; ++&#10;(if (sizeOf(conditions) &gt; 0)&#10;    &quot; WHERE &quot; ++ (conditions joinBy &quot; AND &quot;)&#10; else&#10;    &quot;&quot;)]" doc:name="Build query" doc:id="4fcf0176-a6c8-483a-be2b-aafba7248282" variableName="soqlQuery" />
+		<salesforce:query doc:name="Query" doc:id="b67c88fa-7c9b-4724-ba10-7f7c48c9af99" config-ref="Salesforce_Config">
+			<salesforce:salesforce-query><![CDATA[#[vars.soqlQuery]
+]]></salesforce:salesforce-query>
+		</salesforce:query>
+		<ee:transform doc:name="Transform Message" doc:id="366b9f92-b5bf-4b74-a854-42cfb8c553ed" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="DEBUG" doc:name="Logger (DEBUG)" doc:id="77b430fe-7e1e-4ee7-84e5-701ad7e587a8" message="#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;timestamp: now(),&#10;correlationId: correlationId,&#10;application: app.name,&#10;flow: flow.name,&#10;payload: payload,&#10;attributes: attributes,&#10;vars: vars&#10;}]" category="deloitte.test" />
+	</flow>
+	<flow name="getSFDCcontacts" doc:id="b589c1f6-9581-4fdc-9411-af99ec68395b">
+		<set-variable value="#[attributes.queryParams.accountId default '']" doc:name="Set accountId" doc:id="400daac5-7104-4280-bc42-9acfe1af5dae" variableName="accountId" />
+		<choice doc:name="Choice" doc:id="017f36cb-4b8f-4fc9-a077-b4562f3d8a0b" >
+			<when expression="#[vars.accountId != '']">
+				<salesforce:query doc:name="Query" doc:id="d606b2d2-8ec8-43a8-974e-f3ec67b8460c" config-ref="Salesforce_Config">
+			<salesforce:salesforce-query><![CDATA[SELECT 
+  Id, AccountId, LastName, FirstName, Salutation, Name, MailingStreet
+FROM 
+  Contact
+WHERE
+  AccountId=':accountId'
+]]></salesforce:salesforce-query>
+					<salesforce:parameters ><![CDATA[#[output application/java
+---
+{
+	accountId : vars.accountId
+}]]]></salesforce:parameters>
+		</salesforce:query>
+			</when>
+			<otherwise >
+				<salesforce:query-all doc:name="Query all" doc:id="fcfdb718-2007-4309-9c19-9284139e904c" config-ref="Salesforce_Config">
+					<salesforce:salesforce-query ><![CDATA[SELECT 
+  Id, AccountId, LastName, FirstName, Salutation, Name, MailingStreet
+FROM 
+  Contact]]></salesforce:salesforce-query>
+				</salesforce:query-all>
+			</otherwise>
+		</choice>
+		<ee:transform doc:name="Transform Message" doc:id="f0d3d7a8-59a2-466e-ad30-555062cd5915">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="DEBUG" doc:name="Logger (DEBUG)" doc:id="d92404b5-37de-4d5c-a003-2c7141ebb353" message="#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;timestamp: now(),&#10;correlationId: correlationId,&#10;application: app.name,&#10;flow: flow.name,&#10;payload: payload,&#10;attributes: attributes,&#10;vars: vars&#10;}]" category="deloitte.test" />
+	</flow>
+</mule>

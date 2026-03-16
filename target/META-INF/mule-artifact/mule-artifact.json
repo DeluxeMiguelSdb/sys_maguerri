@@ -1,0 +1,38 @@
+{
+  "configs": [
+    "implementation.xml",
+    "interface.xml",
+    "global.xml"
+  ],
+  "secureProperties": [],
+  "supportedJavaVersions": [],
+  "redeploymentEnabled": true,
+  "name": "6d17cf3d-5ba8-472c-ad34-50869ab044f4:sys-maguerri:1.0.25",
+  "minMuleVersion": "4.11.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "application-types.xml",
+        "global.xml",
+        "implementation.xml",
+        "interface.xml",
+        "log4j2.xml",
+        "properties/dev-config.yaml",
+        "properties/dev-secure.yaml",
+        "properties/local-config.yaml",
+        "properties/pre-config.yaml",
+        "properties/pre-secure.yaml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  },
+  "javaSpecificationVersions": [
+    "17"
+  ]
+}

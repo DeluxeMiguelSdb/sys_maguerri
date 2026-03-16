@@ -1,0 +1,11 @@
+sfdc:
+  customer:
+    key: '3MVG9fTLmJ60pJ5ITt2qHB3A10HgjuVoN8hGCbE4ZKq7hEgMAE._W.giZtfXwVaM23IEeGkZN46KTbqPXAVlz'
+    secret: '![x4kJaJUZynJllKcnEsxqidPjHST2/J1egsamtyeYnKF9U+5uhg0L/wBRTeae1LPi1kR6kc/Uyl4BOcj3YRFfndfimws9Ux7J]'
+  
+  login:
+    username: 'mulesofttest@deloitte.es'
+    password: '![ZXVU9/nE9rQeSGNENmJ5Mg==]'
+    
+  securityToken: '![5tOxEIuwMWWDp+0gl1iGvClTcQRXGlxugV8HMOskrKI=]'
+  tokenEndpoint: 'https://login.salesforce.com/services/oauth2/token'

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>6d17cf3d-5ba8-472c-ad34-50869ab044f4</groupId>
+  <artifactId>s-test-maguerri</artifactId>
+  <version>1.0.2</version>
+  <name>s-test-maguerri</name>
+  <properties>
+    <classifier>raml</classifier>
+    <main>s-test-maguerri.raml</main>
+    <status>published</status>
+    <originalFormatVersion>1.0</originalFormatVersion>
+    <apiVersion>v1</apiVersion>
+    <projectId>c92828ee-b87d-4cea-980c-1350e90f4b06</projectId>
+    <branchId>master</branchId>
+    <commitId>197822f2db59d6fd6377713486b5956c7c48bc1b</commitId>
+    <keywords/>
+    <type>rest-api</type>
+    <mainFile>s-test-maguerri.raml</mainFile>
+  </properties>
+  <repositories>
+    <repository>
+      <id>anypoint-exchange</id>
+      <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+    </repository>
+  </repositories>
+</project>
