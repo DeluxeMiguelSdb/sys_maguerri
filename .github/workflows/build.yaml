@@ -10,6 +10,9 @@ env:
   anypoint_platform_username: ${{ secrets.anypoint_platform_username }}
   anypoint_platform_password: ${{ secrets.anypoint_platform_password }}
   environment: ${{ vars.environment }}
+  connected_app_client_name: ${{ vars.connected_app_client_name }}
+  connected_app_client_id: ${{ vars.connected_app_client_id }}
+  connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
 
 jobs:
   build:

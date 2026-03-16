@@ -3,8 +3,8 @@
   <servers>
     <server>
       <id>anypoint-exchange-v3</id>
-      <username>${env.anypoint_platform_username}</username>
-      <password>${env.anypoint_platform_password}</password>
+      <username>~~~${env.connected_app_client_name}~~~</username>
+      <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
     </server>
   </servers>
   <pluginGroups>
