@@ -15,10 +15,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Build with Maven
-      run: mvn -B clean package -s .maven/settings.xml
     - name: Checkout this repo
       uses: actions/checkout@v3
+    - name: Debug repo structure
+      run: ls -la
+    - name: Build with Maven
+      run: mvn -B clean package -s ~/.m2/settings.xml
     - name: Cache dependencies
       uses: actions/cache@v3
       with:
