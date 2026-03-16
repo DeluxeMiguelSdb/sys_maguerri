@@ -6,6 +6,16 @@
       <username>~~~${env.connected_app_client_name}~~~</username>
       <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
     </server>
+    <server>
+      <id>anypoint-exchange-v2</id>
+      <username>~~~${env.connected_app_client_name}~~~</username>
+      <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
+    </server>
+    <server>
+      <id>Repository</id>
+      <username>~~~${env.connected_app_client_name}~~~</username>
+      <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
+    </server>
   </servers>
   <pluginGroups>
     <pluginGroup>org.mule.tools</pluginGroup>
