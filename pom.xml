@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>6d17cf3d-5ba8-472c-ad34-50869ab044f4</groupId>
 			<artifactId>s-test-maguerri</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.3</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
 		</dependency>
