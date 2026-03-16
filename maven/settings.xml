@@ -6,6 +6,7 @@
   </pluginGroups>
 
   <servers>
+  <server>
       <id>Repository</id>
       <username>~~~Client~~~</username>
       <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
