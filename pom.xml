@@ -18,23 +18,37 @@
 	</properties>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
-				<configuration>
-					<classifier>---- select project type ----</classifier>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <plugins>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-clean-plugin</artifactId>
+    <version>3.0.0</version>
+   </plugin>
+   <plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>${mule.maven.plugin.version}</version>
+    <extensions>true</extensions>
+    <configuration>
+    <cloudHubDeployment>
+     <muleVersion>4.4.0</muleVersion>
+     <username>${env.anypoint_platform_username}</username>
+     <password>${env.anypoint_platform_password}</password>
+     <applicationName>mule-test-cicd-actions-ravyog-${env.ENVIRONMENT}</applicationName>
+     <environment>${env.ENVIRONMENT}</environment>
+     <workers>1</workers>
+     <workerType>MICRO</workerType>
+     <objectStoreV2>true</objectStoreV2>
+     <region>us-east-2</region>
+     <properties>
+#add your enviorment properties here.
+        <mule.env>${env.ENVIRONMENT}</mule.env>
+     </properties>
+    </cloudHubDeployment>
+    </configuration>
+   </plugin>
+  </plugins>
+ </build>
 
 	<dependencies>
 		<dependency>
@@ -101,6 +115,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
+		
 	</pluginRepositories>
 
 </project>

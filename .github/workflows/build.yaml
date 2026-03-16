@@ -9,6 +9,7 @@ on:
 env:
   anypoint_platform_username: ${{ secrets.anypoint_platform_username }}
   anypoint_platform_password: ${{ secrets.anypoint_platform_password }}
+  environment: ${{ vars.environment }}
 
 jobs:
   build:
