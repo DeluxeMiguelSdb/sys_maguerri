@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
+	<groupId>6d17cf3d-5ba8-472c-ad34-50869ab044f4</groupId>
 	<artifactId>sys-maguerri</artifactId>
 	<version>1.0.25</version>
 	<packaging>mule-application</packaging>
@@ -24,29 +24,30 @@
     <artifactId>maven-clean-plugin</artifactId>
     <version>3.0.0</version>
    </plugin>
-   <plugin>
+   
+<plugin>
     <groupId>org.mule.tools.maven</groupId>
     <artifactId>mule-maven-plugin</artifactId>
     <version>${mule.maven.plugin.version}</version>
     <extensions>true</extensions>
     <configuration>
-    <cloudHubDeployment>
-     <muleVersion>4.4.0</muleVersion>
-     <username>${env.anypoint_platform_username}</username>
-     <password>${env.anypoint_platform_password}</password>
-     <applicationName>mule-test-cicd-actions-ravyog-${env.ENVIRONMENT}</applicationName>
-     <environment>${env.ENVIRONMENT}</environment>
-     <workers>1</workers>
-     <workerType>MICRO</workerType>
-     <objectStoreV2>true</objectStoreV2>
-     <region>us-east-2</region>
-     <properties>
-#add your enviorment properties here.
-        <mule.env>${env.ENVIRONMENT}</mule.env>
-     </properties>
-    </cloudHubDeployment>
+        <classifier>mule-application</classifier>
+        <cloudhub2Deployment>
+            <uri>https://anypoint.mulesoft.com</uri>
+            <provider>MC</provider>
+            <environment>Sandbox</environment>
+            <target>Cloudhub-US-East-2</target>
+            <server>Repository</server>
+            <applicationName>${project.artifactId}</applicationName>
+            <releaseChannel>NONE</releaseChannel>
+            <replicas>1</replicas>
+            <vCores>0.1</vCores>
+            <deploymentSettings>
+                <generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+            </deploymentSettings>
+        </cloudhub2Deployment>
     </configuration>
-   </plugin>
+</plugin>
   </plugins>
  </build>
 
@@ -103,6 +104,12 @@
 			<url>https://repository.mulesoft.org/nexus/repository/releases/</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+    <id>Repository</id>
+    <name>Private Exchange repository</name>
+    <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+    <layout>default</layout>
+</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -117,5 +124,12 @@
 		</pluginRepository>
 		
 	</pluginRepositories>
-
+<distributionManagement>
+    <repository>
+        <id>Repository</id>
+        <name>Corporate Repository</name>
+        <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+        <layout>default</layout>
+    </repository>
+</distributionManagement>
 </project>

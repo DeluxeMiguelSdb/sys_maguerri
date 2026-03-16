@@ -3,61 +3,13 @@
   <servers>
     <server>
       <id>anypoint-exchange-v3</id>
-      <username>~~~${env.connected_app_client_name}~~~</username>
-      <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
-    </server>
-    <server>
-      <id>anypoint-exchange-v2</id>
-      <username>~~~${env.connected_app_client_name}~~~</username>
+      <username>~~~Client~~~</username>
       <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
     </server>
     <server>
       <id>Repository</id>
-      <username>~~~${env.connected_app_client_name}~~~</username>
+      <username>~~~Client~~~</username>
       <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
     </server>
   </servers>
-  <pluginGroups>
-    <pluginGroup>org.mule.tools</pluginGroup>
-  </pluginGroups>
-  <profiles>
-    <profile>
-      <id>mule-extra-repos</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>mule-public</id>
-          <url>https://repository.mulesoft.org/nexus/content/repositories/public</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>mule-public</id>
-          <url>https://repository.mulesoft.org/nexus/content/repositories/public</url>
-        </pluginRepository>
-      </pluginRepositories>
-    </profile>
-    <profile>
-      <id>Mule</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <id>MuleRepository</id>
-          <name>MuleRepository</name>
-          <url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
-          <layout>default</layout>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
 </settings>
