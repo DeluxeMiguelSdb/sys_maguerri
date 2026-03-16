@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <settings>
+
+  <pluginGroups>
+    <pluginGroup>org.mule.tools</pluginGroup>
+  </pluginGroups>
+
   <servers>
-    <server>
-      <id>anypoint-exchange-v3</id>
-      <username>~~~Client~~~</username>
-      <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
-    </server>
-    <server>
       <id>Repository</id>
       <username>~~~Client~~~</username>
       <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
