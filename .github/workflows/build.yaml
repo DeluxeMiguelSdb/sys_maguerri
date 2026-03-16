@@ -5,15 +5,6 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
-    
-#env:
-  #anypoint.platform.client_id: ${{ secrets.anypoint_platform_username }}
-  #anypoint.platform.client_secret: ${{ secrets.anypoint_platform_username }}
-  #api.id: ${{ secrets.anypoint_platform_username }}
-  #app.client_id: ${{ secrets.anypoint_platform_username }}
-  #app.client_secret: ${{ secrets.anypoint_platform_username }}
-  #decrypt.key: ${{ secrets.anypoint_platform_username }}
-  #env: ${{ secrets.anypoint_platform_username }}
 
 jobs:
   build:
