@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
-
   <servers>
     <server>
       <id>Repository</id>
       <username>~~~Client~~~</username>
-      <password>2cf7aa529d8d499ab006a0f4c7c4257b~?~cC92B686BB1A4F419a6F5Ae1fEa3D4e1</password>
+      <password>${env.CONNECTED_APP_CLIENT_ID}~?~${env.CONNECTED_APP_SECRET}</password>
     </server>
     <server>
 <id>anypoint-exchange-v3</id>
 <username>~~~Client~~~</username>
-<password>2cf7aa529d8d499ab006a0f4c7c4257b~?~cC92B686BB1A4F419a6F5Ae1fEa3D4e1</password>
+<password>${env.CONNECTED_APP_CLIENT_ID}~?~${env.CONNECTED_APP_SECRET}</password>
 </server>
   </servers>
 </settings>
