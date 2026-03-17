@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 	<http:listener-config name="s-test-maguerri-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="${http.port}" />
     </http:listener-config>
-    <apikit:config name="s-test-maguerri-config" api="resource::6d17cf3d-5ba8-472c-ad34-50869ab044f4:s-test-maguerri:1.0.2:raml:zip:s-test-maguerri.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="s-test-maguerri-config" api="resource::6d17cf3d-5ba8-472c-ad34-50869ab044f4:s-test-maguerri:1.0.3:raml:zip:s-test-maguerri.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
 	<global-property doc:name="Global Property" doc:id="22128a15-4e1c-4e9e-a561-872e0acaaf63" name="env" value="local" />
 	<configuration-properties doc:name="Configuration properties" doc:id="b7177c5f-de56-478a-b38f-ee0c3e450b35" file="properties\\${env}-config.yaml" />
 	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="52903d95-c94f-4fad-8b16-b90b69082cf7" flowRef="s-test-maguerri-main" />
