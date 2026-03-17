@@ -39,6 +39,7 @@
             <target>Cloudhub-US-East-2</target>
             <server>Repository</server>
             <applicationName>${project.artifactId}</applicationName>
+            <javaVersion>17</javaVersion>
             <muleVersion>${app.runtime}</muleVersion>
             <releaseChannel>NONE</releaseChannel>
             <replicas>1</replicas>
