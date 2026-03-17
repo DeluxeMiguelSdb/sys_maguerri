@@ -1,20 +1,24 @@
-name: Build and Deploy to DEV
+name: Build and Deploy
 
 on:
-  push:
-    branches: [ develop ]
   pull_request:
-    branches: [ develop ]
+      - development
+      - main
 
-env:
-  environment: ${{ vars.environment }}
-  connected_app_client_id: ${{ vars.connected_app_client_id }}
-  connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
+jobs:
 
-jobs:         
-  build:
+  # =========================
+  # BUILD + DEPLOY DEV
+  # =========================
+  deploy-dev:
+    if: github.ref == 'refs/heads/development'   # solo se ejecuta si es branch development
     runs-on: ubuntu-latest
-    environment: DEV
+    environment: DEV   # Esto habilita el approval si lo configuras en GitHub
+
+    env:
+      connected_app_client_id: ${{ vars.connected_app_client_id }}
+      connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
+
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v4
@@ -24,7 +28,6 @@ jobs:
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -34,11 +37,51 @@ jobs:
       
       - name: Publish to Exchange
         run: |
-          mvn deploy --settings maven/settings.xml -DskipMunitTests \
-          -Dclient.id="${{ vars.connected_app_client_id }}" \
-          -Dclient.secret="${{ secrets.connected_app_client_secret }}"
-      - name: Deploy to CloudHub 2.0
+          mvn clean deploy --settings maven/settings.xml -DskipMunitTests \
+            -Dclient.id="${{ vars.CONNECTED_APP_CLIENT_ID }}" \
+            -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mule-app
+          path: target/*.jar
+
+      - name: Deploy to CloudHub DEV
         run: |
-          mvn deploy --settings maven/settings.xml -DskipMunitTests -DmuleDeploy \
-          -Dclient.id="${{ vars.connected_app_client_id }}" \
-          -Dclient.secret="${{ secrets.connected_app_client_secret }}"
+          mvn mule:deploy --settings maven/settings.xml -DskipMunitTests \
+            -Dclient.id="${{ vars.CONNECTED_APP_CLIENT_ID }}" \
+            -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
+            -Denvironment=dev
+
+
+  # =========================
+  # DEPLOY PRE (con aprobación)
+  # =========================
+  deploy-pre:
+    if: github.ref == 'refs/heads/main'   # solo se ejecuta si es branch main
+    runs-on: ubuntu-latest
+    environment: PRE 
+
+    env:
+      connected_app_client_id: ${{ vars.connected_app_client_id }}
+      connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mule-app
+
+      - name: Deploy to CloudHub PRE
+        run: |
+          artifact=$(ls *.jar | head -1)
+
+          mvn mule:deploy --settings maven/settings.xml -DskipMunitTests \
+            -Dmule.artifact=$artifact \
+            -Dclient.id="${{ vars.CONNECTED_APP_CLIENT_ID }}" \
+            -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
+            -Denvironment=pre
