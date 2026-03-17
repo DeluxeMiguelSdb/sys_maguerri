@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<settings>
-
-  <pluginGroups>
-    <pluginGroup>org.mule.tools</pluginGroup>
-  </pluginGroups>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
 
   <servers>
     <server>
@@ -11,5 +7,15 @@
       <username>~~~Client~~~</username>
       <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
     </server>
+    <server>
+<id>anypoint-exchange-v3</id>
+<username>~~~Client~~~</username>
+<password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
+</server>
+<server>
+<id>anypoint-exchange-v2</id>
+<username>~~~Client~~~</username>
+<password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
+</server>
   </servers>
 </settings>
