@@ -38,7 +38,7 @@
             <environment>${environment}</environment>
             <target>Cloudhub-US-East-2</target>
             <server>Repository</server>
-            <applicationName>${app.name}</applicationName>
+            <applicationName>${env.APP_NAME}</applicationName>
             <releaseChannel>EDGE</releaseChannel>
             <javaVersion>17</javaVersion>
             <muleVersion>${app.runtime}</muleVersion>

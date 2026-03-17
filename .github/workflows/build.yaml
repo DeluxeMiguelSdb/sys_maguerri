@@ -44,6 +44,7 @@ jobs:
     env:
       connected_app_client_id: ${{ vars.connected_app_client_id }}
       connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
+      APP_NAME: ${{ vars.APP_NAME }}
 
     steps:
       - name: Checkout this repo
@@ -60,7 +61,6 @@ jobs:
             -Dclient.id="${{ vars.CONNECTED_APP_CLIENT_ID }}" \
             -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
             -Denvironment=dev
-            -Dapp.name="${{ vars.APP_NAME }}"
 
 
   # =========================
@@ -74,6 +74,7 @@ jobs:
     env:
       connected_app_client_id: ${{ vars.connected_app_client_id }}
       connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
+      APP_NAME: ${{ vars.APP_NAME }}
 
     steps:
       - name: Checkout this repo
@@ -88,4 +89,3 @@ jobs:
             -Dclient.id="${{ vars.CONNECTED_APP_CLIENT_ID }}" \
             -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
             -Denvironment=pre
-            -Dapp.name="${{ vars.APP_NAME }}"
