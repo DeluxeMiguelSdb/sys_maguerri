@@ -60,6 +60,7 @@ jobs:
             -Dclient.id="${{ vars.CONNECTED_APP_CLIENT_ID }}" \
             -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
             -Denvironment=dev
+            -Dapp.name="${{ vars.APP_NAME }}"
 
 
   # =========================
@@ -87,3 +88,4 @@ jobs:
             -Dclient.id="${{ vars.CONNECTED_APP_CLIENT_ID }}" \
             -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
             -Denvironment=pre
+            -Dapp.name="${{ vars.APP_NAME }}"
