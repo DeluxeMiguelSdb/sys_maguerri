@@ -12,10 +12,5 @@
 <username>~~~Client~~~</username>
 <password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
 </server>
-<server>
-<id>anypoint-exchange-v2</id>
-<username>~~~Client~~~</username>
-<password>${env.connected_app_client_id}~?~${env.connected_app_client_secret}</password>
-</server>
   </servers>
 </settings>
