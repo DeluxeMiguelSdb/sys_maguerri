@@ -2,7 +2,8 @@ name: Build and Deploy
 
 on:
   pull_request:
-      - development
+    branches:
+      - develop
       - main
 
 jobs:
