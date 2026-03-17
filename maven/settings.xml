@@ -4,12 +4,12 @@
     <server>
       <id>Repository</id>
       <username>~~~Client~~~</username>
-      <password>${env.CONNECTED_APP_CLIENT_ID}~?~${env.CONNECTED_APP_SECRET}</password>
+      <password>${connected_app_client_id}~?~${connected_app_client_secret}</password>
     </server>
     <server>
 <id>anypoint-exchange-v3</id>
 <username>~~~Client~~~</username>
-<password>${env.CONNECTED_APP_CLIENT_ID}~?~${env.CONNECTED_APP_SECRET}</password>
+<password>${connected_app_client_id}~?~${connected_app_client_secret}</password>
 </server>
   </servers>
 </settings>
