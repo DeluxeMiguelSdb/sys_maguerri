@@ -4,7 +4,7 @@
 
 	<groupId>6d17cf3d-5ba8-472c-ad34-50869ab044f4</groupId>
 	<artifactId>sys-maguerri</artifactId>
-	<version>1.0.41</version>
+	<version>1.0.42</version>
 	<packaging>mule-application</packaging>
 
 	<name>sys-maguerri</name>
