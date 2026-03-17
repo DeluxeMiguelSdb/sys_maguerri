@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ develop ]
 
+env:
+  connected_app_client_id: ${{ vars.connected_app_client_id }}
+  connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
+
 jobs:         
   build:
     runs-on: ubuntu-latest
