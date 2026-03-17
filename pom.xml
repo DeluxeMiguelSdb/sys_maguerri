@@ -4,7 +4,7 @@
 
 	<groupId>6d17cf3d-5ba8-472c-ad34-50869ab044f4</groupId>
 	<artifactId>sys-maguerri</artifactId>
-	<version>1.0.40</version>
+	<version>1.0.42</version>
 	<packaging>mule-application</packaging>
 
 	<name>sys-maguerri</name>
@@ -38,7 +38,7 @@
             <environment>${environment}</environment>
             <target>Cloudhub-US-East-2</target>
             <server>Repository</server>
-            <applicationName>${project.artifactId}</applicationName>
+            <applicationName>${env.APP_NAME}</applicationName>
             <releaseChannel>EDGE</releaseChannel>
             <javaVersion>17</javaVersion>
             <muleVersion>${app.runtime}</muleVersion>
