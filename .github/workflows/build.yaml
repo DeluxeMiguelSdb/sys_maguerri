@@ -12,7 +12,7 @@ jobs:
   # BUILD + DEPLOY DEV
   # =========================
   deploy-dev:
-    if: github.ref == 'refs/heads/development'   # solo se ejecuta si es branch development
+    if: github.ref == 'refs/heads/develop'   # solo se ejecuta si es branch development
     runs-on: ubuntu-latest
     environment: DEV   # Esto habilita el approval si lo configuras en GitHub
 
