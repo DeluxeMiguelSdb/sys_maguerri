@@ -4,7 +4,7 @@
 
 	<groupId>6d17cf3d-5ba8-472c-ad34-50869ab044f4</groupId>
 	<artifactId>sys-maguerri</artifactId>
-	<version>1.0.30</version>
+	<version>1.0.31</version>
 	<packaging>mule-application</packaging>
 
 	<name>sys-maguerri</name>
@@ -42,7 +42,6 @@
             <releaseChannel>LTS</releaseChannel>
             <javaVersion>17</javaVersion>
             <muleVersion>${app.runtime}</muleVersion>
-            <releaseChannel>NONE</releaseChannel>
             <replicas>1</replicas>
             <vCores>0.1</vCores>
             <deploymentSettings>
