@@ -4,7 +4,7 @@
 
 	<groupId>6d17cf3d-5ba8-472c-ad34-50869ab044f4</groupId>
 	<artifactId>sys-maguerri</artifactId>
-	<version>1.0.31</version>
+	<version>1.0.32</version>
 	<packaging>mule-application</packaging>
 
 	<name>sys-maguerri</name>
@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.6.19:1-java17</app.runtime>
+		<app.runtime>4.11.0-java17</app.runtime>
 		<mule.maven.plugin.version>4.7.0</mule.maven.plugin.version>
 	</properties>
 
