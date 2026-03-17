@@ -1,6 +1,10 @@
-name: Build and Deploy
+name: CI/CD Pipeline
 
 on:
+  pull_request:
+    branches:
+      - develop
+      - pre
   push:
     branches:
       - develop
@@ -9,17 +13,10 @@ on:
 jobs:
 
   # =========================
-  # BUILD + DEPLOY DEV
+  # BUILD AND TEST
   # =========================
-  deploy-dev:
-    if: github.ref == 'refs/heads/develop'   # solo se ejecuta si es branch development
+  build:
     runs-on: ubuntu-latest
-    environment: DEV   # Esto habilita el approval si lo configuras en GitHub
-
-    env:
-      connected_app_client_id: ${{ vars.connected_app_client_id }}
-      connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
-
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v4
@@ -35,7 +32,22 @@ jobs:
         with:
           distribution: "zulu"
           java-version: 17
-      
+
+  # =========================
+  # DEPLOY DEV
+  # =========================
+  deploy-dev:
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: DEV   # Esto habilita el approval si lo configuras en GitHub
+
+    env:
+      connected_app_client_id: ${{ vars.connected_app_client_id }}
+      connected_app_client_secret: ${{ secrets.connected_app_client_secret }}
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
       - name: Publish to Exchange
         run: |
           mvn clean deploy --settings maven/settings.xml -DskipMunitTests \
@@ -54,7 +66,7 @@ jobs:
   # DEPLOY PRE (con aprobación)
   # =========================
   deploy-pre:
-    if: github.ref == 'refs/heads/pre'   # solo se ejecuta si es branch main
+    if: github.ref == 'refs/heads/pre' && github.event_name == 'push'
     runs-on: ubuntu-latest
     environment: PRE 
 
