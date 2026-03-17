@@ -17,6 +17,7 @@ env:
 jobs:         
   build:
     runs-on: ubuntu-latest
+    environment: DEV
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v4
@@ -28,7 +29,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
 
-      - name: Set up JDK 1.8
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
@@ -43,4 +44,4 @@ jobs:
         run: |
           mvn deploy --settings maven/settings.xml -DskipMunitTests -DmuleDeploy \
           -Dclient.id="${{ vars.connected_app_client_id }}" \
-          -Dclient.secret="${{ secrets.secrets.connected_app_client_secret }}"
+          -Dclient.secret="${{ secrets.connected_app_client_secret }}"
